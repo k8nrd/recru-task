@@ -15,7 +15,7 @@ public class FoodieAppTest {
   private WebTestClient webTestClient;
 
   @Test
-  void shouldReturnResponseBody(){
+  void shouldReturnResponseBody() throws InterruptedException {
     webTestClient
         .get()
         .uri("/burgers/{id}", 1)
