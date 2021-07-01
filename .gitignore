@@ -55,7 +55,7 @@ hs_err_pid*
 
 # Mongo Explorer plugin:
 .idea/mongoSettings.xml
-
+.idea/*
 ## File-based project format:
 *.iws
 

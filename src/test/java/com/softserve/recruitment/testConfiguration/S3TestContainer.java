@@ -10,13 +10,15 @@ import java.util.function.Consumer;
 import org.testcontainers.containers.GenericContainer;
 import org.testcontainers.containers.wait.strategy.HttpWaitStrategy;
 
-
 public abstract class S3TestContainer {
   private static final String DATABASE_IMAGE = "minio/minio";
   private static final int PORT = 9000;
+  private static final String ACCESS_KEY = "test";
+  private static final String SECRET_KEY = "testtesttest";
+
   private static final GenericContainer DATABASE_CONTAINER = new GenericContainer(DATABASE_IMAGE)
-      .withEnv("MINIO_ACCESS_KEY", "test")
-      .withEnv("MINIO_SECRET_KEY", "testtesttest")
+      .withEnv("MINIO_ACCESS_KEY", ACCESS_KEY)
+      .withEnv("MINIO_SECRET_KEY", SECRET_KEY)
       .withCommand("server /data")
       .withExposedPorts(PORT)
       .waitingFor(new HttpWaitStrategy()
