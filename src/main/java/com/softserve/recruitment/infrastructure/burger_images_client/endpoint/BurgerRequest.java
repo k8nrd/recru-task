@@ -20,8 +20,9 @@ public class BurgerRequest {
         .uri(uri)
         .accept(MediaType.IMAGE_JPEG)
         .retrieve()
-        .onStatus(HttpStatus::is4xxClientError, clientResponse -> Mono.error(new BurgerRequestException("Not found or incorrect endpoint")))
-        .onStatus(HttpStatus::is5xxServerError, clientResponse -> Mono.error(new BurgerRequestException("Problem with third party service")))
+        .onStatus(HttpStatus::is4xxClientError, clientResponse -> Mono.error(new BurgerRequestClientException("Not found")))
+        .onStatus(HttpStatus::is5xxServerError,
+            clientResponse -> Mono.error(new BurgerRequestServerException("Problem with Foodie Server")))
         .bodyToMono(byte[].class)
         .map(bytes -> Base64.getEncoder()
                             .encodeToString(bytes));

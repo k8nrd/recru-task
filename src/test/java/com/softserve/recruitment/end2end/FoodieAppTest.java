@@ -43,7 +43,7 @@ public class FoodieAppTest extends S3TestContainer {
   }
 
   @Test
-  void shouldReturnResponseBody() throws ExecutionException, InterruptedException {
+  void shouldReturnResponseBody() {
     webTestClient
         .get()
         .uri("/burgers/{id}", 1)
@@ -64,6 +64,17 @@ public class FoodieAppTest extends S3TestContainer {
         .expectBody();
 
     assertThat(isBucketEmpty()).isFalse();
+  }
+
+  @Test
+  void shouldReturnNotFoundWhenIdDoesNotExist() {
+    webTestClient
+        .get()
+        .uri("/burgers/{id}", Long.MAX_VALUE)
+        .exchange()
+        .expectStatus()
+        .isNotFound()
+        .expectBody();
   }
 
   private boolean isBucketEmpty() throws ExecutionException, InterruptedException {
