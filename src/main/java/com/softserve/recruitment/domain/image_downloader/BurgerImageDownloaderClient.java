@@ -1,4 +1,4 @@
-package com.softserve.recruitment.infrastructure.burger_images_client;
+package com.softserve.recruitment.domain.image_downloader;
 
 import reactor.core.publisher.Mono;
 

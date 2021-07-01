@@ -3,7 +3,8 @@ package com.softserve.recruitment.domain.service;
 import static org.mockito.BDDMockito.given;
 
 import com.softserve.recruitment.domain.Burger;
-import com.softserve.recruitment.infrastructure.burger_images_client.BurgerImageDownloaderClient;
+import com.softserve.recruitment.domain.image_downloader.BurgerImageDownloaderClient;
+import com.softserve.recruitment.domain.object_storage.ObjectStorage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -18,11 +19,14 @@ public class BurgerServiceTest {
   @Mock
   private BurgerImageDownloaderClient burgerImageDownloaderClient;
 
+  @Mock
+  private ObjectStorage objectStorage;
+
   private BurgerService burgerService;
 
   @BeforeEach
   void setUp(){
-    burgerService = new DomainBurgerService(burgerImageDownloaderClient);
+    burgerService = new DomainBurgerService(burgerImageDownloaderClient, objectStorage);
   }
 
   @Test
