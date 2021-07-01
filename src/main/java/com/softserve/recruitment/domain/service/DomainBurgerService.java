@@ -23,7 +23,7 @@ public class DomainBurgerService implements BurgerService {
     return burgerImageDownloaderClient.getBurgerImageUrl(id)
         .flatMap(url -> objectStorage.getImageString(url)
                                       .map(image -> createBurger(url, image))
-                                      .switchIfEmpty(fetchImage(url)));
+                                      .switchIfEmpty(Mono.defer(() ->fetchImage(url))));
   }
 
   private Mono<Burger> fetchImage(String url){
